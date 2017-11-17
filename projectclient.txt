@@ -1,0 +1,139 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Clien;
+import java.net.*;
+import java.io.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+    
+
+/**
+ *
+ * @author dc472
+ */
+public class Client {
+    	public static void main(String args[]) throws Exception
+	{
+            String str= "1 : Area of the circle\n2 : Area of the Rectangle\n3 : Convert String to Uppercase\n4 : Covert String to Lowercase\n5 : Find all vowels in the string\n-1 : Quit the program";
+            String st=JOptionPane.showInputDialog(str);
+            int ch = Integer.parseInt(st);
+            while(true)
+            {
+                switch(ch)
+            {
+                case 1 : try{
+                            Socket socket=new Socket("127.0.0.1",8000);
+                            DataInputStream in = new DataInputStream(socket.getInputStream());
+                            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                            int i = 1;
+                            out.write(i);
+                            String t = "Enter radius of the circle: ";
+                            String x=JOptionPane.showInputDialog(t);
+                            double rad=Double.parseDouble(x);
+                            out.writeDouble(rad);
+                            double result=in.readDouble();
+                            String r="Area is: "+result;
+                            JFrame f=new JFrame();  
+                            JOptionPane.showMessageDialog(f,r);
+                            }
+                            catch(IOException ex)
+                            {
+                             System.out.println(ex);
+                            }
+                            break;
+                            
+                case 2 : try{
+                            Socket socket=new Socket("127.0.0.1",8000);
+                            DataInputStream in = new DataInputStream(socket.getInputStream());
+                            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                            int i = 2;
+                            out.write(i);
+                            String t = "Enter length: ";
+                            String u = "Enter Breadth: ";
+                            String x=JOptionPane.showInputDialog(t);
+                            double l=Double.parseDouble(x);
+                            String y=JOptionPane.showInputDialog(u);
+                            double m=Double.parseDouble(y);
+                            out.writeDouble(l);
+                            out.writeDouble(m);
+                            double result=in.readDouble();
+                            String r = "The area is: "+result;
+                            JFrame f=new JFrame();  
+                            JOptionPane.showMessageDialog(f,r);
+                            }
+                            catch(IOException ex)
+                            {
+                             System.out.println(ex); 
+                            }
+                            break;
+                case 3 : try{
+                            Socket socket=new Socket("127.0.0.1",8000);
+                            DataInputStream in = new DataInputStream(socket.getInputStream());
+                            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                            int i = 3;
+                            out.write(i);
+                            String t = "Enter String: ";
+                            String x=JOptionPane.showInputDialog(t);
+                            out.writeUTF(x);
+                            String result=in.readUTF();
+                            String r="String in Uppercase is: "+result;
+                            JFrame f=new JFrame();  
+                            JOptionPane.showMessageDialog(f,r);
+                            }
+                            catch(IOException ex)
+                            {
+                             System.out.println(ex);
+                            }
+                            break;  
+                case 4 : try{
+                            Socket socket=new Socket("127.0.0.1",8000);
+                            DataInputStream in = new DataInputStream(socket.getInputStream());
+                            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                            int i = 4;
+                            out.write(i);
+                            String t = "Enter String: ";
+                            String x=JOptionPane.showInputDialog(t);
+                            out.writeUTF(x);
+                            String result=in.readUTF();
+                            String r="String in Lowercase is: "+result;
+                            JFrame f=new JFrame();  
+                            JOptionPane.showMessageDialog(f,r);
+                            }
+                            catch(IOException ex)
+                            {
+                             System.out.println(ex);
+                            }
+                            break;   
+                case 5 : try{
+                            Socket socket=new Socket("127.0.0.1",8000);
+                            DataInputStream in = new DataInputStream(socket.getInputStream());
+                            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                            int i = 5;
+                            out.write(5);
+                            String t = "Enter String: ";
+                            String x=JOptionPane.showInputDialog(t);
+                            out.writeUTF(x);
+                            String result=in.readUTF();
+                            String r="All vowels of string are: "+result;
+                            JFrame f=new JFrame();  
+                            JOptionPane.showMessageDialog(f,r);
+                            }
+                            catch(IOException ex)
+                            {
+                             System.out.println(ex);
+                            }
+                            break;              
+                case -1 : System.exit(0);
+                default : String p = "Please Enter only the given option numbers:";
+                          JFrame f=new JFrame();  
+                          JOptionPane.showMessageDialog(f,p);
+}
+   String stri= "1 : Area of the circle\n2 : Area of the Rectangle\n3 : Convert String to Uppercase\n4 : Covert String to Lowercase\n5 : Find all vowels in the string\n-1 : Quit the program";
+            String sti=JOptionPane.showInputDialog(stri);
+            ch = Integer.parseInt(sti);             
+            }
+        }           
+}

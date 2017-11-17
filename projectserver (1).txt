@@ -1,0 +1,105 @@
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Serve;
+import java.net.*;
+import java.io.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+    
+/**
+ *
+ * @author dc472
+ */
+public class Server {
+  public static void main(String[] args)
+  {  
+          try{
+          ServerSocket server = new ServerSocket(8000);
+          boolean flag=true;
+          while(flag)
+          {
+              Socket socket = server.accept();
+          
+          DataInputStream input = new DataInputStream(socket.getInputStream());
+          DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+          InetAddress j = InetAddress.getLocalHost();
+          String q = "Connected to 127.0.0.1 on port 8000 from port 8000 of client IP "+j;
+          JFrame f=new JFrame();  
+          JOptionPane.showMessageDialog(f,q);
+          int ch = input.read();
+          switch(ch)
+          {
+              case 1 :  double r = input.readDouble();
+                        double area=3.14*r*r;
+                        String qa = "Radius Got: "+r+"\nArea Computed: "+area;
+                        JOptionPane.showMessageDialog(f,qa);
+                        output.writeDouble(area);
+                        break;
+                        
+              case 2 :  double a = input.readDouble();
+                        double b = input.readDouble();
+                        double rarea = a*b;
+                        String qb = "Length Got: a"+"\nBreadth Got: "+b+"\nArea Computed: "+rarea;
+                        JOptionPane.showMessageDialog(f,qb);
+                        output.writeDouble(rarea);
+                        break;
+                        
+              case 3 :  String s = input.readUTF();
+                        String t = s.toUpperCase();
+                        String qc = "Original String: "+s+"\nNew string: "+t;
+                        JOptionPane.showMessageDialog(f,qc);
+                        output.writeUTF(t);
+                        break;
+                        
+              case 4  : String x = input.readUTF();
+                        String y = x.toLowerCase();
+                        String qd = "Original String: "+x+"\nNew string: "+y;
+                        JOptionPane.showMessageDialog(f,qd);
+                        output.writeUTF(y);
+                        break;  
+                        
+              case 5 :  String z = input.readUTF();
+                        String g ="";
+                        for(int i=0;i<z.length();i++)
+                        {
+                            char c = z.charAt(i);
+                            if(c=='A')
+                                g = g+"A";
+                            if(c=='B')
+                                g = g+"B";
+                            if(c=='C')
+                                g = g+"C";
+                            if(c=='D')
+                                g = g+"D";
+                            if(c=='E')
+                                g = g+"E";
+                            if(c=='a')
+                                g = g+"a";
+                            if(c=='b')
+                                g = g+"b";
+                            if(c=='c')
+                                g = g+"c";
+                            if(c=='d')
+                                g = g+"d";
+                            if(c=='e')
+                                g = g+"e";   
+                        }
+                        String qe = "Original String: "+z+"\nOnly vowels: "+g;
+                        JOptionPane.showMessageDialog(f,qe);
+                        output.writeUTF(g);
+          
+              
+          }
+          }
+   }
+   catch(IOException ex)
+            {
+                System.out.println(ex);
+            }
+  }
+  
+}

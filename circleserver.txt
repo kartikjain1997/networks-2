@@ -1,0 +1,31 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Serve;
+import java.net.*;
+import java.io.*;
+    
+/**
+ *
+ * @author dc472
+ */
+public class Server {
+  public static void main(String[] args)
+  {    
+   try{
+          ServerSocket server = new ServerSocket(8000);
+          Socket socket = server.accept();
+          DataInputStream input = new DataInputStream(socket.getInputStream());
+          DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+          double r = input.readDouble();
+          double area=3.14*r*r;
+          output.writeDouble(area);
+   }
+   catch(IOException ex)
+            {
+                System.out.println(ex);
+            }
+  }
+}
